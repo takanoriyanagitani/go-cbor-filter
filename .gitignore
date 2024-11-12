@@ -26,3 +26,4 @@ go.work.sum
 *.swp
 cmd/cbor2wasm2filterd/cbor2wazero2filtered/cbor2wazero2filtered
 cmd/cbor2maps/nonempty/cbor2non-empty-maps/cbor2non-empty-maps
+cmd/cbor2primitive2filtered/cbor2primitive2filtered
