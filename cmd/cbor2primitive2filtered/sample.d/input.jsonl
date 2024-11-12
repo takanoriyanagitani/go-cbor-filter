@@ -1,0 +1,9 @@
+{"name": "fuji", "height": 3776.0}
+{"name": "sky",  "iheight": 634}
+{"name": "sky2",  "fheight": 634.0, "removed": true}
+{"name": "sky3",  "id": -1}
+{"name": "run", "dist": 42.195}
+{"name": "sky4", "removed": true, "date": "2024/11/12"}
+{"name": "sky5", "removed": true, "date": "2024/11/12"}
+{"name": "sky6", "removed": false, "date": "2024/11/12"}
+{"name": "sky7", "removed": true, "date": "2024/11/12"}
