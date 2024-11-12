@@ -18,6 +18,12 @@ type CborMap map[string]any
 
 type FilterMap func(context.Context, CborMap) (keep bool, err error)
 
+func FilterMapStaticErr(e error) FilterMap {
+	return func(_ context.Context, _ CborMap) (bool, error) {
+		return false, e
+	}
+}
+
 type FilterArray func(context.Context, CborArray) (keep bool, err error)
 
 type FilterSerialized func(context.Context, SerializedArray) (keep bool, e error)
