@@ -11,6 +11,7 @@ import (
 	ffilter "github.com/takanoriyanagitani/go-cbor-filter/filter/map/primitive/float"
 	ifilter "github.com/takanoriyanagitani/go-cbor-filter/filter/map/primitive/signed"
 	sfilter "github.com/takanoriyanagitani/go-cbor-filter/filter/map/primitive/string"
+	rfilter "github.com/takanoriyanagitani/go-cbor-filter/filter/map/primitive/string/regexp"
 	ufilter "github.com/takanoriyanagitani/go-cbor-filter/filter/map/primitive/unsigned"
 )
 
@@ -35,6 +36,7 @@ const (
 	FilterTypeBytes FilterType = "B"
 
 	FilterTypeString FilterType = "S"
+	FilterTypeRegexp FilterType = "R"
 
 	FilterTypeNull FilterType = "n"
 
@@ -59,6 +61,8 @@ func FilterTypeFromString(s string) (FilterType, error) {
 		return FilterTypeBytes, nil
 	case FilterTypeString:
 		return FilterTypeString, nil
+	case FilterTypeRegexp:
+		return FilterTypeRegexp, nil
 	case FilterTypeNull:
 		return FilterTypeNull, nil
 	case FilterTypeTime:
@@ -90,6 +94,8 @@ func (c FilterConfig) ToFilterVal() (mp.FilterVal, error) {
 		return ffilter.FilterFloatFromString(c.Config)
 	case FilterTypeString:
 		return sfilter.FilterStringNew(c.Config), nil
+	case FilterTypeRegexp:
+		return rfilter.FilterRegexpFromString(c.Config)
 	default:
 		log.Printf("invalid filter. type: %v\n", c.FilterType)
 		return nil, ErrInvalidFilter
@@ -138,6 +144,7 @@ func FilterConfigFromStrings(cfg []string) (FilterConfig, error) {
 //	| signed      | id       | -1     | id=i:-1           |
 //	| float       | distance | 42.195 | distance=f:42.195 |
 //	| string      | name     | helo   | name=S:helo       |
+//	| regexp      | name     | helo   | name=R:^helo$     |
 func FilterConfigFromString(cfg string) (FilterConfig, error) {
 	var pair []string = strings.SplitN(cfg, "=", 2)
 	if 2 != len(pair) {

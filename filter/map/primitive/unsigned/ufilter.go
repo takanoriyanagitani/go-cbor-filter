@@ -18,7 +18,7 @@ func (f FilterUnsignedExact) KeepUnsigned(i uint64) (keep bool) {
 	return i == f.Value
 }
 
-func (f FilterUnsignedExact) KeepFloat(v float64) (keep bool)  {
+func (f FilterUnsignedExact) KeepFloat(v float64) (keep bool) {
 	var converted uint64 = uint64(v)
 	return float64(converted) == v && converted == f.Value
 }
